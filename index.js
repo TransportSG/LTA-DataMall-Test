@@ -1,9 +1,9 @@
 let config = require('./config.json');
 let request = require('request');
-let PaginatedRequestor = require('./lib/PaginatedRequestor');
+let BusServiceRouteLister = require('./lib/BusServiceRouteLister');
 
-let requestor = new PaginatedRequestor('BusRoutes', config.accessKey, 1);
+let busServiceRouteLister = new BusServiceRouteLister(config.accessKey);
 
-requestor.performRequest().then(data => {
-    console.log(JSON.stringify(data, null, 2));
+busServiceRouteLister.getData(data => {
+    console.log(JSON.stringify(data[985], null, 2));
 });
