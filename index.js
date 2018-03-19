@@ -1,12 +1,9 @@
 let config = require('./config.json');
 let request = require('request');
+let PaginatedRequestor = require('./lib/PaginatedRequestor');
 
-request.get({
-    url: 'http://datamall2.mytransport.sg/ltaodataservice/BusServices',
-    headers: {
-        AccountKey: config.accessKey,
-        accept: 'application/json'
-    }
-}, (err, resp, body) => {
-    console.log(JSON.stringify(JSON.parse(body), null, 2));
+let requestor = new PaginatedRequestor('BusRoutes', config.accessKey, 1);
+
+requestor.performRequest().then(data => {
+    console.log(JSON.stringify(data, null, 2));
 });
